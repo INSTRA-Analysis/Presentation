@@ -6,7 +6,9 @@ This repository contains a comprehensive presentation about dynamic program anal
 
 ### 📊 Presentation Files
 
-- **[dynamic-analysis-overview.md](dynamic-analysis-overview.md)** - Main presentation file
+- **[dynamic-analysis-overview.md](dynamic-analysis-overview.md)** - Main presentation file (36 slides)
+- **[PRESENTATION-GUIDE.md](PRESENTATION-GUIDE.md)** - Complete guide for presenters and users
+- **[RESOURCES.md](RESOURCES.md)** - Comprehensive resource list with tools, books, and links
 
 ### 📚 Content Overview
 
