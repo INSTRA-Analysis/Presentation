@@ -8,7 +8,7 @@ from scipy.integrate import solve_ivp
 import math
 import scipy as sp
 # %% DEFINE PLOTTING PARAMETERS
-plt.rcParams['figure.figsize'] = (10, 6)
+plt.rcParams['figure.figsize'] = (12, 6)
 plt.rcParams['font.size'] = 12
 plt.rcParams['lines.linewidth'] = 2
 plt.rcParams['axes.grid'] = True

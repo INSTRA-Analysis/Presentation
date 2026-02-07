@@ -31,11 +31,15 @@ def plot_SDOF_forces():
     ax.plot([-3, 2], [-0.82, -0.82], color='black', linewidth=3)
 
     # Draw spring:
-    spring_x = np.linspace(-3, -1, 100)
+    spring_x = np.linspace(-2.5, -1.5, 100)
     spring_amplitude = 0.1
-    spring_y = 0.3 + spring_amplitude * np.sin(20 * np.pi * (spring_x + 3) / 3)
+    spring_y = 0.3 + spring_amplitude * np.sin(2 * np.pi * 5 * (spring_x + 2.5))
     ax.plot(spring_x, spring_y, color='orange', linewidth=2, label='Spring (K)')
     plt.text(-2, 0.45, r'spring ($k$)', fontsize=10, ha='center', color='black', fontweight='bold')
+    #Addlines on both sides of the spring:
+    ax.plot([-3, -2.5], [0.3, 0.3], color='orange', linewidth=2)
+    ax.plot([-1.5, -1], [0.3, 0.3], color='orange', linewidth=2)
+
 
     # Draw damper box:
     damper_w = 0.3
@@ -43,10 +47,10 @@ def plot_SDOF_forces():
     damper_x = -2
     damper_y = -0.25
     damper = Rectangle((damper_x - damper_w/2, damper_y - damper_h/2), damper_w, damper_h, 
-                       edgecolor='blue', facecolor='lightblue', linewidth=1, alpha=0.8)
+                       edgecolor='blue', facecolor='lightblue', linewidth=2, alpha=0.8)
     ax.add_patch(damper)
-    ax.plot([-3, -2.15], [-0.25, -0.25], color='blue', linewidth=1) #([x_start, x_end], [y_connector, y_connector]
-    ax.plot([-1.85, -1], [-0.25, -0.25], color='blue', linewidth=1) #([x_start, x_end], [y_connector, y_connector]
+    ax.plot([-3, -2.15], [-0.25, -0.25], color='blue', linewidth=2) #([x_start, x_end], [y_connector, y_connector]
+    ax.plot([-1.85, -1], [-0.25, -0.25], color='blue', linewidth=2) #([x_start, x_end], [y_connector, y_connector]
 
     plt.text(-2, -0.5, r'Damping ($c$)', fontsize=10, ha='center', color='black', fontweight='bold')
 
@@ -61,6 +65,13 @@ def plot_SDOF_forces():
     arrow = FancyArrowPatch((1, 0), (2, 0), arrowstyle='->', mutation_scale=20, color='green', linewidth=2)
     ax.add_patch(arrow)
     plt.text(2, 0.1, r'Force ($F_{external}$)', fontsize=10, ha='center', color='green', fontweight='bold')
+
+    # Add displacement arrow:
+    ax.plot([0, 0], [0.6, 0.9], color='purple', linewidth=0.8)
+
+    arrow_D = FancyArrowPatch((-0.3, 0.75), (0.3, 0.75), arrowstyle='<->', mutation_scale=20, color='purple', linewidth=0.8)
+    ax.add_patch(arrow_D)
+    plt.text(0.2, 0.85, r'$u$', fontsize=10, ha='center', color='purple', fontweight='bold')
 
     ax.set_xlim(-3, 3)
     ax.set_ylim(-1.5, 1.)
