@@ -4,10 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, FancyArrowPatch
 
 # %%
-def plot_SDOF_forces():
+def plot_SDOF_forces_abstract():
     """
     Create a schematic diagram of a Single Degree of Freedom (SDOF) system with forces.
-    Components: fixed wall, spring, damper, mass, and force arrows
     
     Returns:
     --------
@@ -22,37 +21,15 @@ def plot_SDOF_forces():
     mass = Rectangle((M_x - M_w/2, M_y - M_h/2), M_w, M_h, 
                      edgecolor='darkblue', facecolor='lightblue', linewidth=2, alpha=0.9)
     ax.add_patch(mass)
-    ax.text(M_x, M_y, 'Mass ($M$)', fontsize=14, ha='center', va='center', fontweight='bold')
+    # ax.text(M_x, M_y, 'Mass ($M$)', fontsize=14, ha='center', va='center', fontweight='bold')
 
     #Draw line supporting the damper and spring:
     ax.plot([-3, -3], [0-0.8, 0.8], color='black', linewidth=5)
 
-    #Draw line supporting the damper and spring:
+    #Draw ground line:
     ax.plot([-3, 2], [-0.82, -0.82], color='black', linewidth=3)
 
-    # Draw spring:
-    spring_x = np.linspace(-2.5, -1.5, 100)
-    spring_amplitude = 0.1
-    spring_y = 0.3 + spring_amplitude * np.sin(2 * np.pi * 5 * (spring_x + 2.5))
-    ax.plot(spring_x, spring_y, color='orange', linewidth=2, label='Spring (K)')
-    plt.text(-2, 0.45, r'spring ($k$)', fontsize=10, ha='center', color='black', fontweight='bold')
-    #Addlines on both sides of the spring:
-    ax.plot([-3, -2.5], [0.3, 0.3], color='orange', linewidth=2)
-    ax.plot([-1.5, -1], [0.3, 0.3], color='orange', linewidth=2)
-
-
-    # Draw damper box:
-    damper_w = 0.3
-    damper_h = 0.15
-    damper_x = -2
-    damper_y = -0.25
-    damper = Rectangle((damper_x - damper_w/2, damper_y - damper_h/2), damper_w, damper_h, 
-                       edgecolor='blue', facecolor='lightblue', linewidth=2, alpha=0.8)
-    ax.add_patch(damper)
-    ax.plot([-3, -2.15], [-0.25, -0.25], color='blue', linewidth=2) #([x_start, x_end], [y_connector, y_connector]
-    ax.plot([-1.85, -1], [-0.25, -0.25], color='blue', linewidth=2) #([x_start, x_end], [y_connector, y_connector]
-
-    plt.text(-2, -0.5, r'Damping ($c$)', fontsize=10, ha='center', color='black', fontweight='bold')
+    
 
     # Draw circles for friction:
     radius = 0.08
@@ -64,10 +41,28 @@ def plot_SDOF_forces():
     # Add external force arrow:
     arrow = FancyArrowPatch((1, 0), (2, 0), arrowstyle='->', mutation_scale=20, color='green', linewidth=2)
     ax.add_patch(arrow)
-    plt.text(2, 0.1, r'Force ($F_{external}$)', fontsize=10, ha='center', color='green', fontweight='bold')
+    plt.text(2, 0.1, r'$F_{ext}$', fontsize=10, ha='center', color='green', fontweight='bold')
+
+    # Add external force arrow:
+    arrow = FancyArrowPatch((-1, 0.3), (-2, 0.3), arrowstyle='->', mutation_scale=20, color='blue', linewidth=2)
+    ax.add_patch(arrow)
+    plt.text(-2, 0.1, r'$F_{k}$', fontsize=10, ha='center', color='blue', fontweight='bold')
+
+    # Add external force arrow:
+    arrow = FancyArrowPatch((-1, -0.3), (-2, -0.3), arrowstyle='->', mutation_scale=20, color='blue', linewidth=2)
+    ax.add_patch(arrow)
+    plt.text(-2, -0.15, r'$F_{c}$', fontsize=10, ha='center', color='blue', fontweight='bold')
 
     # Add displacement arrow:
     ax.plot([0, 0], [0.6, 0.9], color='purple', linewidth=0.8)
+
+    # Add external force arrow:
+    arrow = FancyArrowPatch((0, 0), (-1.3, 0), arrowstyle='->', mutation_scale=20, color='blue', linewidth=2, linestyle='--')
+    ax.add_patch(arrow)
+    # Add dot at start point
+    dot = plt.Circle((0, 0), radius=0.05, color='blue', zorder=10)
+    ax.add_patch(dot)
+    plt.text(0.1, 0.1, r'$F_{i}$', fontsize=10, ha='center', color='blue', fontweight='bold')
 
     arrow_D = FancyArrowPatch((-0.3, 0.75), (0.3, 0.75), arrowstyle='<->', mutation_scale=20, color='purple', linewidth=0.8)
     ax.add_patch(arrow_D)
@@ -78,13 +73,13 @@ def plot_SDOF_forces():
     ax.set_aspect('equal')
     ax.axis('off')
 
-    ax.set_title('Schematic of SDOF System', fontsize=16)
+    ax.set_title('Schematic of SDOF forces', fontsize=16)
 
     ax.text(0, -1.3, r'$F_k + F_c + F_i = F_{ext}$', fontsize=12, ha='center', color='black', fontweight='bold')
 
     return fig, ax
 
-fig, ax = plot_SDOF_forces()
-plt
+fig, ax = plot_SDOF_forces_abstract()
+plt.show()
 
 # %%

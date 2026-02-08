@@ -38,3 +38,6 @@ ut.plot_SDOF_forces()
 plt.show()
 
 # %%
+ut.plot_SDOF_forces_abstract()
+plt.show()
+# %%
